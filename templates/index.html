@@ -7,17 +7,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
 :root {
-  --bg: #07071a;
-  --sur: rgba(255,255,255,0.04);
-  --bdr: rgba(255,255,255,0.09);
-  --p: #6366f1; --ps: #4f46e5;
-  --sec: #8b5cf6;
-  --cy: #06b6d4;
-  --gr: #10b981;
-  --am: #f59e0b;
-  --rd: #ef4444;
-  --tx: #e2e8f0; --mt: #64748b;
-  --r: 12px;
+  --bg:#07071a; --sur:rgba(255,255,255,.04); --bdr:rgba(255,255,255,.09);
+  --p:#6366f1; --ps:#4f46e5; --sec:#8b5cf6; --cy:#06b6d4; --gr:#10b981;
+  --am:#f59e0b; --rd:#ef4444; --tx:#e2e8f0; --mt:#64748b; --r:12px;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;min-height:100vh;overflow-x:hidden}
@@ -35,10 +27,9 @@ header{position:sticky;top:0;z-index:50;background:rgba(7,7,26,.85);backdrop-fil
 .badge-done{background:rgba(99,102,241,.2);color:#a5b4fc;border:1px solid rgba(99,102,241,.4)}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.6}}
 
-/* Step nav */
 .snav{background:rgba(7,7,26,.7);border-bottom:1px solid var(--bdr);padding:0 24px;overflow-x:auto}
 .snav-inner{display:flex;max-width:1200px;margin:0 auto;gap:2px}
-.sbtn{display:flex;align-items:center;gap:7px;padding:13px 16px;border:none;background:none;color:var(--mt);cursor:pointer;font-size:.82rem;font-weight:500;border-bottom:2px solid transparent;transition:all .2s;white-space:nowrap;position:relative}
+.sbtn{display:flex;align-items:center;gap:7px;padding:13px 16px;border:none;background:none;color:var(--mt);cursor:pointer;font-size:.82rem;font-weight:500;border-bottom:2px solid transparent;transition:all .2s;white-space:nowrap}
 .sbtn:hover:not(.locked){color:var(--tx)}
 .sbtn.active{color:var(--p);border-bottom-color:var(--p)}
 .sbtn.done{color:var(--gr)}
@@ -46,13 +37,10 @@ header{position:sticky;top:0;z-index:50;background:rgba(7,7,26,.85);backdrop-fil
 .snum{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;background:var(--sur);flex-shrink:0}
 .sbtn.active .snum{background:var(--p)}
 .sbtn.done .snum{background:var(--gr)}
-.lock-ic{font-size:.65rem;opacity:.7}
 
-/* Main */
 .main{max-width:1200px;margin:0 auto;padding:28px 24px;position:relative;z-index:1}
 .panel{display:none}.panel.active{display:block}
 
-/* Cards */
 .card{background:var(--sur);border:1px solid var(--bdr);border-radius:var(--r);padding:20px}
 .card-title{font-size:.82rem;font-weight:600;color:var(--mt);text-transform:uppercase;letter-spacing:.06em;margin-bottom:14px}
 .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
@@ -60,15 +48,11 @@ header{position:sticky;top:0;z-index:50;background:rgba(7,7,26,.85);backdrop-fil
 .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
 @media(max-width:700px){.grid-2,.grid-3,.grid-4{grid-template-columns:1fr}}
 
-/* Stat cards */
 .stat{background:linear-gradient(135deg,rgba(99,102,241,.12),rgba(139,92,246,.08));border:1px solid rgba(99,102,241,.2);border-radius:var(--r);padding:16px;text-align:center}
 .stat-val{font-size:1.9rem;font-weight:800;color:var(--p);font-variant-numeric:tabular-nums}
 .stat-lbl{font-size:.73rem;color:var(--mt);margin-top:4px}
-.stat.cy .stat-val{color:var(--cy)}
-.stat.gr .stat-val{color:var(--gr)}
-.stat.am .stat-val{color:var(--am)}
+.stat.cy .stat-val{color:var(--cy)}.stat.gr .stat-val{color:var(--gr)}.stat.am .stat-val{color:var(--am)}
 
-/* Buttons */
 .btn{display:inline-flex;align-items:center;gap:7px;padding:9px 20px;border-radius:8px;border:none;font-size:.85rem;font-weight:600;cursor:pointer;transition:all .2s}
 .btn-primary{background:linear-gradient(135deg,var(--p),var(--ps));color:#fff}
 .btn-primary:hover{opacity:.85;transform:translateY(-1px)}
@@ -79,56 +63,73 @@ header{position:sticky;top:0;z-index:50;background:rgba(7,7,26,.85);backdrop-fil
 .btn-ghost:hover{background:rgba(255,255,255,.08)}
 .btn-sm{padding:6px 14px;font-size:.78rem}
 .row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.mt8{margin-top:8px}.mt12{margin-top:12px}.mt16{margin-top:16px}.mt20{margin-top:20px}
+.mt8{margin-top:8px}.mt12{margin-top:12px}.mt16{margin-top:16px}.mt20{margin-top:20px}.mb8{margin-bottom:8px}
 
-/* Table */
 .tbl-wrap{overflow-x:auto;border-radius:8px;border:1px solid var(--bdr)}
 table{width:100%;border-collapse:collapse;font-size:.82rem}
 th{background:rgba(255,255,255,.05);padding:9px 14px;text-align:left;color:var(--mt);font-weight:600;font-size:.75rem;text-transform:uppercase;letter-spacing:.04em}
 td{padding:9px 14px;border-top:1px solid var(--bdr);font-family:'Fira Code',monospace;font-size:.8rem}
 tr:hover td{background:rgba(255,255,255,.025)}
 
-/* Inputs / sliders */
 label.lbl{display:block;font-size:.78rem;color:var(--mt);margin-bottom:6px;font-weight:500}
 input[type=range]{width:100%;accent-color:var(--p);cursor:pointer}
 select,input[type=number],input[type=text]{background:rgba(255,255,255,.06);border:1px solid var(--bdr);border-radius:7px;color:var(--tx);padding:7px 11px;font-size:.83rem;width:100%;outline:none}
 select:focus,input:focus{border-color:var(--p);box-shadow:0 0 0 2px rgba(99,102,241,.2)}
 .range-row{display:flex;justify-content:space-between;font-size:.72rem;color:var(--mt);margin-top:2px}
 
-/* Progress */
 .prog-wrap{background:rgba(255,255,255,.07);border-radius:99px;overflow:hidden;height:7px}
 .prog-bar{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--p),var(--cy));transition:width .4s ease}
 
-/* Tags */
 .tag{display:inline-block;padding:2px 8px;border-radius:99px;font-size:.72rem;font-weight:600;margin:2px}
 .tag-k{background:rgba(99,102,241,.2);color:#a5b4fc;border:1px solid rgba(99,102,241,.3)}
 .tag-u{background:rgba(239,68,68,.15);color:#fca5a5;border:1px solid rgba(239,68,68,.25)}
 .tag-idx{background:rgba(6,182,212,.12);color:#67e8f9;border:1px solid rgba(6,182,212,.25)}
 
-/* Log */
 .log{background:#000;border:1px solid var(--bdr);border-radius:8px;padding:12px;height:140px;overflow-y:auto;font-family:'Fira Code',monospace;font-size:.73rem;color:#94a3b8}
 .log .le{color:var(--gr)}.log .lw{color:var(--am)}.log .li{color:var(--cy)}.log .lr{color:var(--rd)}
-
-/* Chart */
 .chart-box{position:relative;height:240px}
-
-/* Attention heatmap */
 #attn-wrap{overflow-x:auto;overflow-y:auto;max-height:360px}
 canvas#attn-cv{display:block}
 
-/* Bleu gauges */
 .bleu-wrap{display:flex;gap:20px;justify-content:center;flex-wrap:wrap}
 .bleu-gauge{text-align:center;padding:20px 30px;background:linear-gradient(135deg,rgba(99,102,241,.12),rgba(16,185,129,.08));border:1px solid rgba(99,102,241,.2);border-radius:var(--r)}
 .bleu-val{font-size:2.8rem;font-weight:900;color:var(--p)}
 .bleu-sub{font-size:.75rem;color:var(--mt);margin-top:4px}
 .bleu-gauge.gr .bleu-val{color:var(--gr)}
 
-/* Translation result */
 .tl-box{background:rgba(255,255,255,.04);border:1px solid var(--bdr);border-radius:8px;padding:14px}
 .tl-label{font-size:.7rem;color:var(--mt);font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
 .tl-text{font-size:1.05rem;font-weight:600;color:var(--tx);font-family:'Fira Code',monospace}
 
-/* Toast */
+/* OOV warning banner */
+.oov-banner{background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.4);border-radius:8px;padding:12px 16px;margin-top:12px;display:flex;align-items:flex-start;gap:10px}
+.oov-icon{font-size:1.2rem;flex-shrink:0;margin-top:1px}
+.oov-body{flex:1}
+.oov-title{font-size:.82rem;font-weight:700;color:#fcd34d;margin-bottom:4px}
+.oov-desc{font-size:.76rem;color:#fde68a;line-height:1.5}
+.oov-tokens{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+.oov-tok{background:rgba(239,68,68,.2);color:#fca5a5;border:1px solid rgba(239,68,68,.35);padding:2px 9px;border-radius:99px;font-size:.75rem;font-weight:700;font-family:'Fira Code',monospace}
+
+/* Token visualization row */
+.tok-row{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
+.tok-chip{padding:4px 10px;border-radius:6px;font-size:.77rem;font-family:'Fira Code',monospace;font-weight:600}
+.tok-known{background:rgba(99,102,241,.18);color:#c4b5fd;border:1px solid rgba(99,102,241,.3)}
+.tok-unk{background:rgba(239,68,68,.18);color:#fca5a5;border:1px solid rgba(239,68,68,.35);position:relative}
+.tok-unk::after{content:'UNK';position:absolute;top:-8px;right:-4px;font-size:.55rem;background:var(--rd);color:#fff;border-radius:3px;padding:1px 4px}
+
+/* Test sentence chips */
+.test-group-title{font-size:.78rem;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:7px}
+.test-chips{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:16px}
+.test-chip{padding:6px 13px;border-radius:8px;font-size:.78rem;font-family:'Fira Code',monospace;cursor:pointer;transition:all .2s;text-align:left;border:none;line-height:1.4}
+.chip-ok{background:rgba(16,185,129,.1);color:#6ee7b7;border:1px solid rgba(16,185,129,.25)}
+.chip-ok:hover{background:rgba(16,185,129,.2);transform:translateY(-1px)}
+.chip-oov{background:rgba(245,158,11,.1);color:#fcd34d;border:1px solid rgba(245,158,11,.25)}
+.chip-oov:hover{background:rgba(245,158,11,.2);transform:translateY(-1px)}
+.chip-desc{display:block;font-size:.65rem;color:var(--mt);font-family:'Inter',sans-serif;margin-top:2px}
+
+/* Vocab category badges */
+.vcat-badge{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:6px;font-size:.72rem;font-weight:600;margin:3px;background:rgba(99,102,241,.12);color:#a5b4fc;border:1px solid rgba(99,102,241,.2)}
+
 #toast-ct{position:fixed;bottom:24px;right:24px;z-index:999;display:flex;flex-direction:column;gap:8px}
 .toast{padding:10px 16px;border-radius:8px;font-size:.82rem;font-weight:500;backdrop-filter:blur(12px);animation:toastin .3s ease;max-width:320px}
 .toast-ok{background:rgba(16,185,129,.2);border:1px solid rgba(16,185,129,.4);color:#6ee7b7}
@@ -137,7 +138,6 @@ canvas#attn-cv{display:block}
 .toast-warn{background:rgba(245,158,11,.2);border:1px solid rgba(245,158,11,.4);color:#fcd34d}
 @keyframes toastin{from{transform:translateX(40px);opacity:0}to{transform:translateX(0);opacity:1}}
 
-/* misc */
 .sep{border:none;border-top:1px solid var(--bdr);margin:20px 0}
 .mono{font-family:'Fira Code',monospace}
 .sm-note{font-size:.75rem;color:var(--mt);line-height:1.5}
@@ -149,6 +149,11 @@ canvas#attn-cv{display:block}
 .m-g{background:rgba(245,158,11,.15);color:#fcd34d}
 .m-b{background:rgba(99,102,241,.2);color:#a5b4fc}
 .sample-fr{font-size:.82rem;font-family:'Fira Code',monospace;color:var(--tx)}
+
+/* Pair counter summary */
+.pair-summary{background:linear-gradient(135deg,rgba(6,182,212,.08),rgba(99,102,241,.06));border:1px solid rgba(6,182,212,.2);border-radius:8px;padding:12px 16px;margin-top:12px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.pair-summary-num{font-size:1.4rem;font-weight:800;color:var(--cy);font-variant-numeric:tabular-nums}
+.pair-summary-txt{font-size:.78rem;color:var(--mt);line-height:1.5}
 </style>
 </head>
 <body>
@@ -169,32 +174,60 @@ canvas#attn-cv{display:block}
 <nav class="snav">
   <div class="snav-inner">
     <button class="sbtn active" id="snav-1" onclick="nav(1)"><span class="snum">1</span>📊 Data</button>
-    <button class="sbtn locked" id="snav-2" onclick="nav(2)"><span class="snum">2</span>📚 Vocab <span class="lock-ic" id="lk-2">🔒</span></button>
-    <button class="sbtn locked" id="snav-3" onclick="nav(3)"><span class="snum">3</span>🏗️ Model <span class="lock-ic" id="lk-3">🔒</span></button>
-    <button class="sbtn locked" id="snav-4" onclick="nav(4)"><span class="snum">4</span>🎯 Train <span class="lock-ic" id="lk-4">🔒</span></button>
-    <button class="sbtn locked" id="snav-5" onclick="nav(5)"><span class="snum">5</span>📈 Evaluate <span class="lock-ic" id="lk-5">🔒</span></button>
-    <button class="sbtn locked" id="snav-6" onclick="nav(6)"><span class="snum">6</span>🔤 Infer <span class="lock-ic" id="lk-6">🔒</span></button>
+    <button class="sbtn locked" id="snav-2" onclick="nav(2)"><span class="snum">2</span>📚 Vocab</button>
+    <button class="sbtn locked" id="snav-3" onclick="nav(3)"><span class="snum">3</span>🏗️ Model</button>
+    <button class="sbtn locked" id="snav-4" onclick="nav(4)"><span class="snum">4</span>🎯 Train</button>
+    <button class="sbtn locked" id="snav-5" onclick="nav(5)"><span class="snum">5</span>📈 Evaluate</button>
+    <button class="sbtn locked" id="snav-6" onclick="nav(6)"><span class="snum">6</span>🔤 Infer</button>
   </div>
 </nav>
 
 <main class="main">
 
-<!-- ─── STEP 1: DATA ─────────────────────────────────────────────── -->
+<!-- ─── STEP 1: DATA ─────────────────────────────────────────────────────────── -->
 <div class="panel active" id="panel-1">
   <div class="card">
     <div class="card-title">📊 Dataset Configuration</div>
-    <div class="grid-4 mt8" id="data-stats">
-      <div class="stat"><div class="stat-val" id="ds-uniq">80</div><div class="stat-lbl">Unique Pairs</div></div>
+    <div class="grid-4 mt8">
+      <div class="stat"><div class="stat-val" id="ds-avail">138</div><div class="stat-lbl">Available Pairs</div></div>
+      <div class="stat cy"><div class="stat-val" id="ds-using">138</div><div class="stat-lbl">Pairs Used</div></div>
       <div class="stat am"><div class="stat-val" id="ds-aug">—</div><div class="stat-lbl">Augmented Total</div></div>
-      <div class="stat cy"><div class="stat-val" id="ds-tr">—</div><div class="stat-lbl">Training Set</div></div>
-      <div class="stat gr"><div class="stat-val" id="ds-vl">—</div><div class="stat-lbl">Validation Set</div></div>
+      <div class="stat gr"><div class="stat-val" id="ds-tr">—</div><div class="stat-lbl">Training Set</div></div>
     </div>
+
+    <!-- Max pairs slider -->
     <div class="mt16">
+      <label class="lbl">Max Unique Pairs to Use: <strong id="mp-val">138</strong> <span class="sm-note" style="display:inline">(of 138 available)</span></label>
+      <input type="range" id="mp-slider" min="20" max="138" step="2" value="138" oninput="mpChange(this.value)">
+      <div class="range-row"><span>20 pairs (minimal)</span><span>80 (original)</span><span>138 (full dataset)</span></div>
+    </div>
+
+    <!-- Augmentation slider -->
+    <div class="mt12">
       <label class="lbl">Augmentation Factor: <strong id="aug-val">12×</strong></label>
       <input type="range" id="aug-slider" min="1" max="16" value="12" oninput="augChange(this.value)">
-      <div class="range-row"><span>1× (80 pairs)</span><span>16× (1280 pairs)</span></div>
+      <div class="range-row"><span>1× (no repeat)</span><span>8×</span><span>16× (maximum)</span></div>
     </div>
-    <div class="sm-note mt12">Each sentence pair is shuffled and repeated to create a richer training set. The dataset is split 87.5% train / 12.5% val.</div>
+
+    <div class="pair-summary" id="pair-summary">
+      <div class="pair-summary-num" id="ps-total">1,656</div>
+      <div class="pair-summary-txt">total training samples after augmentation<br><span style="color:var(--p)">~1,449</span> train · <span style="color:var(--gr)">~207</span> validation (87.5 / 12.5 split)</div>
+    </div>
+
+    <div class="card mt16">
+      <div class="card-title">📚 Vocabulary Categories Covered</div>
+      <div class="mt8" id="vcat-list">
+        <span class="vcat-badge">🏃 Basic Actions (20)</span>
+        <span class="vcat-badge">🎯 Extended Actions (10)</span>
+        <span class="vcat-badge">👥 Plurals & Groups (10)</span>
+        <span class="vcat-badge">🎨 Adjectives (29)</span>
+        <span class="vcat-badge">👤 First-Person (17)</span>
+        <span class="vcat-badge">👫 He / She (20)</span>
+        <span class="vcat-badge">⚡ New Verbs (12)</span>
+        <span class="vcat-badge">📍 Adverbs & Spatial (22)</span>
+      </div>
+    </div>
+
     <div class="row mt16">
       <button class="btn btn-primary" id="btn-data" onclick="step1()">📊 Initialize Data</button>
     </div>
@@ -213,7 +246,7 @@ canvas#attn-cv{display:block}
   </div>
 </div>
 
-<!-- ─── STEP 2: VOCAB ─────────────────────────────────────────────── -->
+<!-- ─── STEP 2: VOCAB ─────────────────────────────────────────────────────────── -->
 <div class="panel" id="panel-2">
   <div class="grid-2">
     <div class="card">
@@ -233,7 +266,7 @@ canvas#attn-cv{display:block}
   <div class="card mt16">
     <div class="card-title">🔬 Live Tokenizer Demo</div>
     <div class="row mt8">
-      <input type="text" id="tok-input" placeholder="Type an English sentence..." style="flex:1" oninput="tokDemo()">
+      <input type="text" id="tok-input" placeholder="Type an English sentence…" style="flex:1" oninput="tokDemo()">
     </div>
     <div id="tok-out" class="mt12"></div>
   </div>
@@ -252,7 +285,7 @@ canvas#attn-cv{display:block}
   </div>
 </div>
 
-<!-- ─── STEP 3: MODEL ─────────────────────────────────────────────── -->
+<!-- ─── STEP 3: MODEL ─────────────────────────────────────────────────────────── -->
 <div class="panel" id="panel-3">
   <div class="grid-2">
     <div class="card">
@@ -289,7 +322,6 @@ canvas#attn-cv{display:block}
         <div class="range-row"><span>0.00</span><span>0.15</span><span>0.30</span></div>
       </div>
     </div>
-
     <div>
       <div class="card">
         <div class="card-title">📐 Parameter Count</div>
@@ -308,39 +340,24 @@ canvas#attn-cv{display:block}
   </div>
 </div>
 
-<!-- ─── STEP 4: TRAINING ─────────────────────────────────────────── -->
+<!-- ─── STEP 4: TRAINING ─────────────────────────────────────────────────────── -->
 <div class="panel" id="panel-4">
   <div class="grid-2">
     <div class="card">
       <div class="card-title">🎛️ Training Config</div>
       <div class="grid-2 mt8">
-        <div>
-          <label class="lbl">Epochs</label>
-          <input type="number" id="tr-epochs" value="30" min="5" max="100">
+        <div><label class="lbl">Epochs</label><input type="number" id="tr-epochs" value="30" min="5" max="100"></div>
+        <div><label class="lbl">Batch Size</label>
+          <select id="tr-batch"><option value="16">16</option><option value="32" selected>32</option><option value="64">64</option></select>
         </div>
-        <div>
-          <label class="lbl">Batch Size</label>
-          <select id="tr-batch">
-            <option value="16">16</option>
-            <option value="32" selected>32</option>
-            <option value="64">64</option>
-          </select>
-        </div>
-        <div>
-          <label class="lbl">Patience (early stop)</label>
-          <input type="number" id="tr-patience" value="8" min="3" max="20">
-        </div>
-        <div>
-          <label class="lbl">Warmup Steps</label>
-          <input type="number" id="tr-warmup" value="100" min="50" max="400">
-        </div>
+        <div><label class="lbl">Patience (early stop)</label><input type="number" id="tr-patience" value="8" min="3" max="20"></div>
+        <div><label class="lbl">Warmup Steps</label><input type="number" id="tr-warmup" value="100" min="50" max="400"></div>
       </div>
       <div class="row mt16">
         <button class="btn btn-primary" id="btn-start" onclick="startTrain()">▶ Start Training</button>
         <button class="btn btn-danger btn-sm" id="btn-stop" onclick="stopTrain()" disabled>⏹ Stop</button>
       </div>
     </div>
-
     <div class="card">
       <div class="card-title">📊 Training Progress</div>
       <div class="grid-2 mt8">
@@ -366,69 +383,84 @@ canvas#attn-cv{display:block}
       </div>
     </div>
   </div>
-
   <div class="card mt16">
     <div class="card-title">📈 Live Loss Curves</div>
     <div class="chart-box"><canvas id="loss-chart"></canvas></div>
   </div>
-
   <div class="card mt16">
     <div class="card-title">🔤 Live Sample Translations</div>
-    <div id="live-samples">
-      <div class="sm-note" style="text-align:center;padding:16px">Translations will appear here during training…</div>
-    </div>
+    <div id="live-samples"><div class="sm-note" style="text-align:center;padding:16px">Translations will appear here during training…</div></div>
   </div>
-
   <div class="card mt16">
     <div class="card-title">📋 Training Log</div>
     <div class="log" id="train-log"></div>
   </div>
 </div>
 
-<!-- ─── STEP 5: EVALUATION ─────────────────────────────────────────── -->
+<!-- ─── STEP 5: EVALUATION ─────────────────────────────────────────────────────── -->
 <div class="panel" id="panel-5">
   <div class="card">
     <div class="card-title">🏆 BLEU Scores</div>
     <div class="bleu-wrap mt12">
-      <div class="bleu-gauge">
-        <div class="bleu-val" id="bleu-g">—</div>
-        <div class="bleu-sub">Greedy Search BLEU</div>
-      </div>
-      <div class="bleu-gauge gr">
-        <div class="bleu-val gr" id="bleu-b">—</div>
-        <div class="bleu-sub">Beam Search BLEU (beam=4)</div>
-      </div>
+      <div class="bleu-gauge"><div class="bleu-val" id="bleu-g">—</div><div class="bleu-sub">Greedy Search BLEU</div></div>
+      <div class="bleu-gauge gr"><div class="bleu-val gr" id="bleu-b">—</div><div class="bleu-sub">Beam Search BLEU (beam=4)</div></div>
     </div>
-    <div class="sm-note mt12" style="text-align:center">Scores are computed on the 80-pair training vocabulary. Expect 70–95+ after full convergence.</div>
+    <div class="sm-note mt12" style="text-align:center">Scores computed on the training vocabulary. Expect 70–95+ after full convergence.</div>
   </div>
-
   <div class="card mt16">
     <div class="card-title">📝 Sample Translations</div>
     <div class="tbl-wrap mt8">
-      <table id="eval-table">
-        <thead><tr><th>English</th><th>Reference FR</th><th>Greedy</th><th>Beam-4</th></tr></thead>
-        <tbody id="eval-tbody">
-          <tr><td colspan="4" style="color:var(--mt);text-align:center;padding:20px">Complete training to see results</td></tr>
-        </tbody>
+      <table><thead><tr><th>English</th><th>Reference FR</th><th>Greedy</th><th>Beam-4</th></tr></thead>
+        <tbody id="eval-tbody"><tr><td colspan="4" style="color:var(--mt);text-align:center;padding:20px">Complete training to see results</td></tr></tbody>
       </table>
     </div>
   </div>
-
   <div class="card mt16">
     <div class="card-title">📈 Final Loss Curve</div>
     <div class="chart-box"><canvas id="eval-chart"></canvas></div>
   </div>
 </div>
 
-<!-- ─── STEP 6: INFERENCE ─────────────────────────────────────────── -->
+<!-- ─── STEP 6: INFERENCE ─────────────────────────────────────────────────────── -->
 <div class="panel" id="panel-6">
+
+  <!-- Predefined test sentences -->
   <div class="card">
+    <div class="card-title">📋 Predefined Test Sentences <span class="sm-note" style="font-size:.72rem;text-transform:none;letter-spacing:0">— held-out, never used in training</span></div>
+    <div class="sm-note mb8">Click any sentence to load it into the translator. Orange chips intentionally contain out-of-vocabulary words to demonstrate model behavior.</div>
+
+    <div class="test-group-title" style="color:var(--gr)">✅ All tokens in training vocabulary <span class="sm-note">(should translate well)</span></div>
+    <div class="test-chips" id="chips-ok"></div>
+
+    <div class="test-group-title" style="color:var(--am)">⚠️ Contains out-of-vocabulary tokens <span class="sm-note">(unknown words map to &lt;unk&gt;)</span></div>
+    <div class="test-chips" id="chips-oov"></div>
+  </div>
+
+  <!-- Translate input -->
+  <div class="card mt16">
     <div class="card-title">🔤 Translate a Sentence</div>
     <div class="row mt8">
-      <input type="text" id="infer-input" placeholder="e.g. the cat is sleeping ." style="flex:1" onkeyup="if(event.key==='Enter')doTranslate()">
+      <input type="text" id="infer-input" placeholder="Type your own sentence or click a chip above…" style="flex:1" oninput="liveOovCheck()" onkeyup="if(event.key==='Enter')doTranslate()">
       <button class="btn btn-primary" id="btn-translate" onclick="doTranslate()">Translate →</button>
     </div>
-    <div class="sm-note mt8">Model vocabulary is limited to training words. Unknown tokens will be mapped to &lt;unk&gt;.</div>
+
+    <!-- Live OOV check while typing -->
+    <div id="live-tok-row" class="mt12" style="display:none">
+      <div class="sm-note mb8">Token analysis:</div>
+      <div class="tok-row" id="tok-chips"></div>
+    </div>
+
+    <!-- OOV warning banner -->
+    <div class="oov-banner" id="oov-banner" style="display:none">
+      <div class="oov-icon">⚠️</div>
+      <div class="oov-body">
+        <div class="oov-title">Out-of-Vocabulary Words Detected</div>
+        <div class="oov-desc">The following words are <strong>not in the training vocabulary</strong> and will be replaced by the <code>&lt;unk&gt;</code> token during translation. This typically degrades output quality and the model may produce nonsensical French.</div>
+        <div class="oov-tokens" id="oov-toks"></div>
+      </div>
+    </div>
+
+    <!-- Translation results -->
     <div class="grid-2 mt16" id="tl-results" style="display:none">
       <div class="tl-box">
         <div class="tl-label">🔍 Greedy Search</div>
@@ -441,6 +473,7 @@ canvas#attn-cv{display:block}
     </div>
   </div>
 
+  <!-- Attention heatmap -->
   <div class="card mt16" id="attn-card" style="display:none">
     <div class="card-title">🧠 Cross-Attention Heatmap <span class="sm-note">(last decoder layer · averaged over heads)</span></div>
     <div class="sm-note mt8 mb8" style="margin-bottom:12px">Each row = a target token, each column = a source token. Brighter = higher attention weight.</div>
@@ -449,84 +482,82 @@ canvas#attn-cv{display:block}
 </div>
 
 </main>
-
 <div id="toast-ct"></div>
 
 <script>
 // ─── State ────────────────────────────────────────────────────────────────────
-const S = {
-  step: 1,
-  ready: {data:false, vocab:false, model:false, trained:false},
-  chart: null, evalChart: null,
-  sse: null,
-  trainLosses: [], valLosses: [], lrHistory: [],
-  totalEpochs: 0,
+const S = {step:1, ready:{data:false,vocab:false,model:false,trained:false},
+  chart:null, evalChart:null, sse:null,
+  trainLosses:[], valLosses:[], lrHistory:[], totalEpochs:0,
+  srcVocab: null,  // cached for live OOV check
 };
 
 // ─── Nav ──────────────────────────────────────────────────────────────────────
-const UNLOCK = ['data','vocab','model','trained','trained'];
 function nav(n) {
-  const needs = {2:'data',3:'vocab',4:'model',5:'trained',6:'trained'};
+  const needs={2:'data',3:'vocab',4:'model',5:'trained',6:'trained'};
   if (needs[n] && !S.ready[needs[n]]) { toast('Complete step '+(n-1)+' first','warn'); return; }
-  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.sbtn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.sbtn').forEach(b=>b.classList.remove('active'));
   document.getElementById('panel-'+n).classList.add('active');
   document.getElementById('snav-'+n).classList.add('active');
   S.step = n;
-  if (n === 5 && S.ready.trained) refreshEvalChart();
+  if (n===5 && S.ready.trained) refreshEvalChart();
+  if (n===6) loadTestSentences();
 }
 
 function unlockStep(n) {
   const btn = document.getElementById('snav-'+n);
-  const lk = document.getElementById('lk-'+n);
   if (btn) { btn.classList.remove('locked'); btn.classList.add('done'); }
-  if (lk) lk.textContent = '✓';
 }
 
 // ─── Toast ────────────────────────────────────────────────────────────────────
-function toast(msg, type='info') {
-  const ct = document.getElementById('toast-ct');
-  const el = document.createElement('div');
-  el.className = `toast toast-${type}`;
-  el.textContent = msg;
-  ct.appendChild(el);
-  setTimeout(() => el.remove(), 4000);
+function toast(msg,type='info') {
+  const el=document.createElement('div');
+  el.className=`toast toast-${type}`; el.textContent=msg;
+  document.getElementById('toast-ct').appendChild(el);
+  setTimeout(()=>el.remove(),4000);
 }
 
-// ─── API helper ───────────────────────────────────────────────────────────────
-async function api(url, body) {
-  const r = await fetch(url, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(body)});
+// ─── API ──────────────────────────────────────────────────────────────────────
+async function api(url,body) {
+  const r=await fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
   return r.json();
 }
 
-// ─── Augmentation slider ──────────────────────────────────────────────────────
+// ─── Sliders ─────────────────────────────────────────────────────────────────
+function mpChange(v) {
+  const aug = +document.getElementById('aug-slider').value;
+  document.getElementById('mp-val').textContent = v;
+  document.getElementById('ds-using').textContent = v;
+  updatePairSummary(+v, aug);
+}
 function augChange(v) {
+  const mp = +document.getElementById('mp-slider').value;
   document.getElementById('aug-val').textContent = v+'×';
+  updatePairSummary(mp, +v);
+}
+function updatePairSummary(mp, aug) {
+  const total = mp * aug;
+  const tr = Math.round(total * 0.875);
+  const vl = total - tr;
+  document.getElementById('ps-total').textContent = total.toLocaleString();
+  document.querySelector('.pair-summary-txt').innerHTML =
+    `total training samples after augmentation<br><span style="color:var(--p)">${tr.toLocaleString()}</span> train · <span style="color:var(--gr)">${vl.toLocaleString()}</span> validation (87.5 / 12.5 split)`;
 }
 
-// ─── Model config live update ─────────────────────────────────────────────────
+// ─── Model config ─────────────────────────────────────────────────────────────
 function cfgChange() {
-  const dm = +document.getElementById('dm').value;
-  const nl = +document.getElementById('nl').value;
-  const df = +document.getElementById('df').value;
-  const nh = +document.getElementById('nh').value;
-  const drop = +document.getElementById('do').value;
-  document.getElementById('dm-val').textContent = dm;
-  document.getElementById('nl-val').textContent = nl;
-  document.getElementById('df-val').textContent = df;
-  document.getElementById('nh-val').textContent = nh;
-  document.getElementById('do-val').textContent = drop.toFixed(2);
-  const srcV = 85, tgtV = 95;
-  const emb = (srcV + tgtV) * dm;
-  const enc = nl * (4*dm*dm + dm + 2*dm*df + dm);
-  const dec = nl * (8*dm*dm + dm + 2*dm*df + dm);
-  const proj = dm * tgtV;
-  const est = emb + enc + dec + proj;
-  document.getElementById('param-est').textContent = est > 999 ? (est/1000).toFixed(1)+'K' : est;
-  updateArchDiag(dm, nh, nl, df);
-}
-
-function updateArchDiag(dm, nh, nl, df) {
+  const dm=+document.getElementById('dm').value, nl=+document.getElementById('nl').value;
+  const df=+document.getElementById('df').value, nh=+document.getElementById('nh').value;
+  const drop=+document.getElementById('do').value;
+  document.getElementById('dm-val').textContent=dm;
+  document.getElementById('nl-val').textContent=nl;
+  document.getElementById('df-val').textContent=df;
+  document.getElementById('nh-val').textContent=nh;
+  document.getElementById('do-val').textContent=drop.toFixed(2);
+  const srcV=85,tgtV=95;
+  const est=(srcV+tgtV)*dm + nl*(4*dm*dm+dm+2*dm*df+dm) + nl*(8*dm*dm+dm+2*dm*df+dm) + dm*tgtV;
+  document.getElementById('param-est').textContent = est>999?(est/1000).toFixed(1)+'K':est;
   document.getElementById('arch-diag').textContent =
 `Transformer (EN→FR)
 ${'─'.repeat(34)}
@@ -538,7 +569,7 @@ Encoder (×${nl})
 
 Decoder (×${nl})
   MaskedSelfAttn(heads=${nh})
-  CrossAttn(heads=${nh})  ← src
+  CrossAttn(heads=${nh})  ← src context
   FeedForward(${dm}→${df}→${dm})
   LayerNorm ×3
 
@@ -547,110 +578,93 @@ Linear Projection → softmax → FR token`;
 
 // ─── Step 1: Data ─────────────────────────────────────────────────────────────
 async function step1() {
-  document.getElementById('btn-data').disabled = true;
-  const aug = +document.getElementById('aug-slider').value;
-  const d = await api('/api/init/data', {augmentation: aug});
-  if (d.error) { toast(d.error,'err'); document.getElementById('btn-data').disabled=false; return; }
-  document.getElementById('ds-uniq').textContent = d.unique_pairs;
-  document.getElementById('ds-aug').textContent = d.total;
-  document.getElementById('ds-tr').textContent = d.train_size;
-  document.getElementById('ds-vl').textContent = d.val_size;
-  const tbody = document.getElementById('pairs-tbody');
-  tbody.innerHTML = d.sample.map((p,i) => `<tr><td style="color:var(--mt)">${i+1}</td><td>${p[0]}</td><td style="color:var(--cy)">${p[1]}</td></tr>`).join('');
-  S.ready.data = true;
+  document.getElementById('btn-data').disabled=true;
+  const aug=+document.getElementById('aug-slider').value;
+  const mp=+document.getElementById('mp-slider').value;
+  const d=await api('/api/init/data',{augmentation:aug,max_pairs:mp});
+  if (d.error){toast(d.error,'err');document.getElementById('btn-data').disabled=false;return;}
+  document.getElementById('ds-avail').textContent=d.total_available;
+  document.getElementById('ds-using').textContent=d.unique_pairs;
+  document.getElementById('ds-aug').textContent=d.total.toLocaleString();
+  document.getElementById('ds-tr').textContent=d.train_size.toLocaleString();
+  const tbody=document.getElementById('pairs-tbody');
+  tbody.innerHTML=d.sample.map((p,i)=>`<tr><td style="color:var(--mt)">${i+1}</td><td>${p[0]}</td><td style="color:var(--cy)">${p[1]}</td></tr>`).join('');
+  S.ready.data=true;
   unlockStep(2);
-  document.getElementById('btn-data').disabled = false;
-  document.getElementById('global-badge').className = 'badge badge-ok';
-  document.getElementById('global-badge').textContent = '✓ Data Ready';
-  toast('Data initialized — '+d.total+' pairs ('+d.aug_factor+'× augmentation)','ok');
+  document.getElementById('btn-data').disabled=false;
+  document.getElementById('global-badge').className='badge badge-ok';
+  document.getElementById('global-badge').textContent='✓ Data Ready';
+  toast(`Data initialized — ${d.unique_pairs} pairs × ${d.aug_factor} = ${d.total.toLocaleString()} samples`,'ok');
 }
 
 // ─── Step 2: Vocab ────────────────────────────────────────────────────────────
 async function step2() {
-  document.getElementById('btn-vocab').disabled = true;
-  const d = await api('/api/init/vocab', {});
-  if (d.error) { toast(d.error,'err'); document.getElementById('btn-vocab').disabled=false; return; }
-  document.getElementById('sv-sz').textContent = d.src_size;
-  document.getElementById('tv-sz').textContent = d.tgt_size;
-  const renderSample = (obj) => Object.entries(obj).map(([w,i]) => `<span class="tag tag-k">${w}</span><span class="tag tag-idx">${i}</span>`).join(' ');
-  document.getElementById('sv-sample').innerHTML = '<div class="sm-note" style="margin-bottom:6px">Sample mappings:</div>' + renderSample(d.src_sample);
-  document.getElementById('tv-sample').innerHTML = '<div class="sm-note" style="margin-bottom:6px">Sample mappings:</div>' + renderSample(d.tgt_sample);
-  S.ready.vocab = true;
-  unlockStep(3);
-  document.getElementById('btn-vocab').disabled = false;
-  document.getElementById('global-badge').textContent = '✓ Vocab Ready';
-  toast('Vocabulary built — EN: '+d.src_size+' tokens, FR: '+d.tgt_size+' tokens','ok');
+  document.getElementById('btn-vocab').disabled=true;
+  const d=await api('/api/init/vocab',{});
+  if (d.error){toast(d.error,'err');document.getElementById('btn-vocab').disabled=false;return;}
+  document.getElementById('sv-sz').textContent=d.src_size;
+  document.getElementById('tv-sz').textContent=d.tgt_size;
+  S.srcVocab = d.src_sample; // partial — used for live check hint only
+  const renderSample=obj=>Object.entries(obj).map(([w,i])=>`<span class="tag tag-k">${w}</span><span class="tag tag-idx">${i}</span>`).join(' ');
+  document.getElementById('sv-sample').innerHTML='<div class="sm-note mb8">Sample mappings:</div>'+renderSample(d.src_sample);
+  document.getElementById('tv-sample').innerHTML='<div class="sm-note mb8">Sample mappings:</div>'+renderSample(d.tgt_sample);
+  S.ready.vocab=true; unlockStep(3);
+  document.getElementById('btn-vocab').disabled=false;
+  document.getElementById('global-badge').textContent='✓ Vocab Ready';
+  toast(`Vocabulary built — EN: ${d.src_size} tokens, FR: ${d.tgt_size} tokens`,'ok');
 }
 
 async function tokDemo() {
-  const s = document.getElementById('tok-input').value.trim();
-  if (!s || !S.ready.vocab) { document.getElementById('tok-out').innerHTML=''; return; }
-  const d = await api('/api/tokenize', {sentence: s});
+  const s=document.getElementById('tok-input').value.trim();
+  if (!s||!S.ready.vocab){document.getElementById('tok-out').innerHTML='';return;}
+  const d=await api('/api/tokenize',{sentence:s});
   if (d.error) return;
-  const out = document.getElementById('tok-out');
-  const tags = d.tokens.map(t => `<span class="tag ${d.known.includes(t)?'tag-k':'tag-u'}">${t}</span>`).join(' ');
-  out.innerHTML = `<div class="sm-note mb4">Tokens: ${tags}</div><div class="sm-note mt8">Encoded: <span class="mono" style="color:var(--cy)">[${d.encoded.join(', ')}]</span></div>${d.unknown.length?'<div class="sm-note mt4" style="color:var(--am)">⚠ Unknown: '+d.unknown.map(t=>`<span class="tag tag-u">${t}</span>`).join(' ')+'</div>':''}`;
+  const tags=d.tokens.map(t=>`<span class="tag ${d.known.includes(t)?'tag-k':'tag-u'}">${t}</span>`).join(' ');
+  document.getElementById('tok-out').innerHTML=
+    `<div class="sm-note mb8">Tokens: ${tags}</div><div class="sm-note mt8">Encoded: <span class="mono" style="color:var(--cy)">[${d.encoded.join(', ')}]</span></div>${d.unknown.length?'<div class="sm-note mt8" style="color:var(--am)">⚠ Unknown tokens (will become &lt;unk&gt;): '+d.unknown.map(t=>`<span class="tag tag-u">${t}</span>`).join(' ')+'</div>':'<div class="sm-note mt8" style="color:var(--gr)">✓ All tokens are in vocabulary</div>'}`;
 }
 
 // ─── Step 3: Model ────────────────────────────────────────────────────────────
 async function step3() {
-  document.getElementById('btn-model').disabled = true;
-  const cfg = {
-    d_model: +document.getElementById('dm').value,
-    num_heads: +document.getElementById('nh').value,
-    num_layers: +document.getElementById('nl').value,
-    d_ff: +document.getElementById('df').value,
-    dropout: +document.getElementById('do').value,
-  };
-  const d = await api('/api/init/model', cfg);
-  if (d.error) { toast(d.error,'err'); document.getElementById('btn-model').disabled=false; return; }
-  document.getElementById('param-est').textContent = d.params.toLocaleString();
-  document.getElementById('model-built-note').textContent = '✓ Built with '+d.params.toLocaleString()+' parameters';
-  S.ready.model = true;
-  unlockStep(4);
-  document.getElementById('btn-model').disabled = false;
-  document.getElementById('global-badge').textContent = '✓ Model Ready';
-  toast('Model built — '+d.params.toLocaleString()+' trainable parameters','ok');
+  document.getElementById('btn-model').disabled=true;
+  const cfg={d_model:+document.getElementById('dm').value,num_heads:+document.getElementById('nh').value,
+    num_layers:+document.getElementById('nl').value,d_ff:+document.getElementById('df').value,
+    dropout:+document.getElementById('do').value};
+  const d=await api('/api/init/model',cfg);
+  if (d.error){toast(d.error,'err');document.getElementById('btn-model').disabled=false;return;}
+  document.getElementById('param-est').textContent=d.params.toLocaleString();
+  document.getElementById('model-built-note').textContent='✓ Built with '+d.params.toLocaleString()+' parameters';
+  S.ready.model=true; unlockStep(4);
+  document.getElementById('btn-model').disabled=false;
+  document.getElementById('global-badge').textContent='✓ Model Ready';
+  toast(`Model built — ${d.params.toLocaleString()} trainable parameters`,'ok');
 }
 
 // ─── Step 4: Training ─────────────────────────────────────────────────────────
 function initChart() {
-  const ctx = document.getElementById('loss-chart').getContext('2d');
-  S.chart = new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: [],
-      datasets: [
-        {label:'Train Loss', data:[], borderColor:'#6366f1', backgroundColor:'rgba(99,102,241,.12)', tension:.4, pointRadius:3, pointHoverRadius:5},
-        {label:'Val Loss',   data:[], borderColor:'#10b981', backgroundColor:'rgba(16,185,129,.08)', tension:.4, pointRadius:3, pointHoverRadius:5},
-      ]
-    },
-    options: {
-      responsive:true, maintainAspectRatio:false,
-      animation:{duration:0},
+  const ctx=document.getElementById('loss-chart').getContext('2d');
+  S.chart=new Chart(ctx,{type:'line',
+    data:{labels:[],datasets:[
+      {label:'Train Loss',data:[],borderColor:'#6366f1',backgroundColor:'rgba(99,102,241,.12)',tension:.4,pointRadius:3},
+      {label:'Val Loss',  data:[],borderColor:'#10b981',backgroundColor:'rgba(16,185,129,.08)',tension:.4,pointRadius:3},
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,animation:{duration:0},
       plugins:{legend:{labels:{color:'#e2e8f0',font:{size:12}}}},
-      scales:{
-        x:{grid:{color:'rgba(255,255,255,.05)'},ticks:{color:'#64748b'},title:{display:true,text:'Epoch',color:'#64748b'}},
-        y:{grid:{color:'rgba(255,255,255,.05)'},ticks:{color:'#64748b'},title:{display:true,text:'Loss',color:'#64748b'},beginAtZero:false},
-      }
-    }
+      scales:{x:{grid:{color:'rgba(255,255,255,.05)'},ticks:{color:'#64748b'},title:{display:true,text:'Epoch',color:'#64748b'}},
+              y:{grid:{color:'rgba(255,255,255,.05)'},ticks:{color:'#64748b'},title:{display:true,text:'Loss',color:'#64748b'},beginAtZero:false}}}
   });
 }
-
 function refreshChart() {
   if (!S.chart) return;
-  const labels = S.trainLosses.map((_,i)=>i+1);
-  S.chart.data.labels = labels;
-  S.chart.data.datasets[0].data = S.trainLosses;
-  S.chart.data.datasets[1].data = S.valLosses;
+  S.chart.data.labels=S.trainLosses.map((_,i)=>i+1);
+  S.chart.data.datasets[0].data=S.trainLosses;
+  S.chart.data.datasets[1].data=S.valLosses;
   S.chart.update('none');
 }
-
 function refreshEvalChart() {
   if (!S.evalChart) {
-    const ctx = document.getElementById('eval-chart').getContext('2d');
-    S.evalChart = new Chart(ctx, {
-      type:'line',
+    const ctx=document.getElementById('eval-chart').getContext('2d');
+    S.evalChart=new Chart(ctx,{type:'line',
       data:{labels:[],datasets:[
         {label:'Train Loss',data:[],borderColor:'#6366f1',tension:.4,pointRadius:2},
         {label:'Val Loss',  data:[],borderColor:'#10b981',tension:.4,pointRadius:2},
@@ -662,243 +676,247 @@ function refreshEvalChart() {
       }
     });
   }
-  S.evalChart.data.labels = S.trainLosses.map((_,i)=>i+1);
-  S.evalChart.data.datasets[0].data = S.trainLosses;
-  S.evalChart.data.datasets[1].data = S.valLosses;
+  S.evalChart.data.labels=S.trainLosses.map((_,i)=>i+1);
+  S.evalChart.data.datasets[0].data=S.trainLosses;
+  S.evalChart.data.datasets[1].data=S.valLosses;
   S.evalChart.update();
 }
 
 async function startTrain() {
   if (!S.chart) initChart();
-  S.trainLosses = []; S.valLosses = []; S.lrHistory = [];
-  if (S.chart) { S.chart.data.labels=[]; S.chart.data.datasets.forEach(d=>d.data=[]); S.chart.update('none'); }
-  document.getElementById('train-log').innerHTML = '';
-
-  const cfg = {
-    epochs: +document.getElementById('tr-epochs').value,
-    batch_size: +document.getElementById('tr-batch').value,
-    patience: +document.getElementById('tr-patience').value,
-    warmup_steps: +document.getElementById('tr-warmup').value,
-  };
-  S.totalEpochs = cfg.epochs;
-  document.getElementById('ep-tot').textContent = cfg.epochs;
-
-  const d = await api('/api/train/start', cfg);
-  if (d.error) { toast(d.error,'err'); return; }
-
-  document.getElementById('btn-start').disabled = true;
-  document.getElementById('btn-stop').disabled = false;
-  document.getElementById('global-badge').className = 'badge badge-run';
-  document.getElementById('global-badge').textContent = '🔄 Training…';
+  S.trainLosses=[]; S.valLosses=[];
+  if (S.chart){S.chart.data.labels=[];S.chart.data.datasets.forEach(d=>d.data=[]);S.chart.update('none');}
+  document.getElementById('train-log').innerHTML='';
+  const cfg={epochs:+document.getElementById('tr-epochs').value,batch_size:+document.getElementById('tr-batch').value,
+    patience:+document.getElementById('tr-patience').value,warmup_steps:+document.getElementById('tr-warmup').value};
+  S.totalEpochs=cfg.epochs;
+  document.getElementById('ep-tot').textContent=cfg.epochs;
+  const d=await api('/api/train/start',cfg);
+  if (d.error){toast(d.error,'err');return;}
+  document.getElementById('btn-start').disabled=true;
+  document.getElementById('btn-stop').disabled=false;
+  document.getElementById('global-badge').className='badge badge-run';
+  document.getElementById('global-badge').textContent='🔄 Training…';
   toast('Training started','info');
   connectSSE();
 }
-
 function stopTrain() {
-  fetch('/api/train/stop', {method:'POST'});
-  document.getElementById('btn-stop').disabled = true;
+  fetch('/api/train/stop',{method:'POST'});
+  document.getElementById('btn-stop').disabled=true;
   addLog('Stop requested…','w');
 }
-
 function connectSSE() {
-  if (S.sse) { S.sse.close(); S.sse = null; }
-  S.sse = new EventSource('/api/train/stream');
-  S.sse.onmessage = e => handleSSE(JSON.parse(e.data));
-  S.sse.onerror = () => { S.sse.close(); S.sse = null; };
+  if (S.sse){S.sse.close();S.sse=null;}
+  S.sse=new EventSource('/api/train/stream');
+  S.sse.onmessage=e=>handleSSE(JSON.parse(e.data));
+  S.sse.onerror=()=>{S.sse.close();S.sse=null;};
 }
-
 function handleSSE(msg) {
   switch(msg.type) {
     case 'ping': break;
     case 'epoch_start':
-      document.getElementById('ep-cur').textContent = msg.epoch;
-      document.getElementById('ep-label').textContent = `Epoch ${msg.epoch} / ${msg.total}`;
-      document.getElementById('ep-prog').style.width = ((msg.epoch-1)/msg.total*100).toFixed(1)+'%';
-      addLog(`Epoch ${msg.epoch}/${msg.total} started`,'i');
-      break;
+      document.getElementById('ep-cur').textContent=msg.epoch;
+      document.getElementById('ep-label').textContent=`Epoch ${msg.epoch} / ${msg.total}`;
+      document.getElementById('ep-prog').style.width=((msg.epoch-1)/msg.total*100).toFixed(1)+'%';
+      addLog(`Epoch ${msg.epoch}/${msg.total} started`,'i'); break;
     case 'batch':
-      document.getElementById('lr-val').textContent = msg.lr.toExponential(2);
-      document.getElementById('bl-val').textContent = msg.loss.toFixed(4);
-      document.getElementById('ep-label').textContent = `Epoch ${msg.epoch} · batch ${msg.batch}/${msg.total_batches}`;
-      break;
+      document.getElementById('lr-val').textContent=msg.lr.toExponential(2);
+      document.getElementById('bl-val').textContent=msg.loss.toFixed(4);
+      document.getElementById('ep-label').textContent=`Epoch ${msg.epoch} · batch ${msg.batch}/${msg.total_batches}`; break;
     case 'epoch_end':
-      S.trainLosses.push(msg.train_loss);
-      S.valLosses.push(msg.val_loss);
-      S.lrHistory.push(msg.lr);
-      refreshChart();
-      document.getElementById('ep-prog').style.width = (msg.epoch/S.totalEpochs*100).toFixed(1)+'%';
-      document.getElementById('tr-ppl').textContent = msg.train_ppl;
-      document.getElementById('vl-ppl').textContent = msg.val_ppl;
-      document.getElementById('pat-label').textContent = msg.improved ? '✓ Improved' : `Patience: ${msg.patience}/${msg.patience_max}`;
-      addLog(`Epoch ${msg.epoch} · train: ${msg.train_loss} · val: ${msg.val_loss} · PPL: ${msg.val_ppl}`, msg.improved?'e':'i');
-      if (msg.samples) updateLiveSamples(msg.samples);
-      break;
+      S.trainLosses.push(msg.train_loss); S.valLosses.push(msg.val_loss); refreshChart();
+      document.getElementById('ep-prog').style.width=(msg.epoch/S.totalEpochs*100).toFixed(1)+'%';
+      document.getElementById('tr-ppl').textContent=msg.train_ppl;
+      document.getElementById('vl-ppl').textContent=msg.val_ppl;
+      document.getElementById('pat-label').textContent=msg.improved?'✓ Improved':`Patience: ${msg.patience}/${msg.patience_max}`;
+      addLog(`Epoch ${msg.epoch} · train: ${msg.train_loss} · val: ${msg.val_loss} · PPL: ${msg.val_ppl}`,msg.improved?'e':'i');
+      if (msg.samples) updateLiveSamples(msg.samples); break;
     case 'early_stop':
       addLog(`Early stopping at epoch ${msg.epoch} · best val: ${msg.best_val}`,'w');
-      toast('Early stopping triggered','warn');
-      break;
+      toast('Early stopping triggered','warn'); break;
     case 'stopped':
-      finishTraining(false);
-      addLog('Training stopped by user','w');
-      break;
+      finishTraining(false); addLog('Training stopped by user','w'); break;
     case 'done':
-      S.ready.trained = true;
-      document.getElementById('bleu-g').textContent = msg.bleu_greedy.toFixed(1);
-      document.getElementById('bleu-b').textContent = msg.bleu_beam.toFixed(1);
+      S.ready.trained=true;
+      document.getElementById('bleu-g').textContent=msg.bleu_greedy.toFixed(1);
+      document.getElementById('bleu-b').textContent=msg.bleu_beam.toFixed(1);
       if (msg.final_samples) updateEvalTable(msg.final_samples);
       finishTraining(true);
       addLog(`Done! BLEU greedy=${msg.bleu_greedy} beam=${msg.bleu_beam}`,'e');
       unlockStep(5); unlockStep(6);
-      toast(`Training complete · BLEU (beam): ${msg.bleu_beam}`,'ok');
-      break;
+      toast(`Training complete · BLEU (beam): ${msg.bleu_beam}`,'ok'); break;
     case 'error':
-      finishTraining(false);
-      addLog('Error: '+msg.message,'r');
-      toast('Training error: '+msg.message,'err');
-      break;
+      finishTraining(false); addLog('Error: '+msg.message,'r');
+      toast('Training error: '+msg.message,'err'); break;
   }
 }
-
 function finishTraining(success) {
-  document.getElementById('btn-start').disabled = false;
-  document.getElementById('btn-stop').disabled = true;
-  document.getElementById('ep-prog').style.width = success ? '100%' : document.getElementById('ep-prog').style.width;
-  document.getElementById('global-badge').className = success ? 'badge badge-done' : 'badge badge-idle';
-  document.getElementById('global-badge').textContent = success ? '✅ Training Complete' : '⏹ Stopped';
-  if (S.sse) { S.sse.close(); S.sse = null; }
+  document.getElementById('btn-start').disabled=false;
+  document.getElementById('btn-stop').disabled=true;
+  document.getElementById('global-badge').className=success?'badge badge-done':'badge badge-idle';
+  document.getElementById('global-badge').textContent=success?'✅ Training Complete':'⏹ Stopped';
+  if (S.sse){S.sse.close();S.sse=null;}
 }
-
-function addLog(msg, cls) {
-  const log = document.getElementById('train-log');
-  const now = new Date().toTimeString().slice(0,8);
-  const d = document.createElement('div');
-  d.className = 'l'+cls;
-  d.textContent = `[${now}] ${msg}`;
-  log.appendChild(d);
-  log.scrollTop = log.scrollHeight;
+function addLog(msg,cls) {
+  const log=document.getElementById('train-log');
+  const d=document.createElement('div'); d.className='l'+cls;
+  d.textContent=`[${new Date().toTimeString().slice(0,8)}] ${msg}`;
+  log.appendChild(d); log.scrollTop=log.scrollHeight;
 }
-
 function updateLiveSamples(samples) {
-  document.getElementById('live-samples').innerHTML = samples.map(s => `
+  document.getElementById('live-samples').innerHTML=samples.map(s=>`
     <div class="sample-card">
       <div class="sample-en">🇬🇧 ${s.en}</div>
       <div class="sample-row"><span class="sample-method m-g">Greedy</span><span class="sample-fr">${s.greedy||'—'}</span></div>
       <div class="sample-row"><span class="sample-method m-b">Beam-4</span><span class="sample-fr">${s.beam||'—'}</span></div>
     </div>`).join('');
 }
-
 function updateEvalTable(samples) {
-  document.getElementById('eval-tbody').innerHTML = samples.map(s => `
-    <tr>
-      <td>${s.en}</td>
-      <td style="color:var(--cy)">${s.fr_ref}</td>
-      <td style="color:var(--am)">${s.greedy||'—'}</td>
-      <td style="color:var(--p)">${s.beam||'—'}</td>
-    </tr>`).join('');
+  document.getElementById('eval-tbody').innerHTML=samples.map(s=>`
+    <tr><td>${s.en}</td><td style="color:var(--cy)">${s.fr_ref}</td><td style="color:var(--am)">${s.greedy||'—'}</td><td style="color:var(--p)">${s.beam||'—'}</td></tr>`).join('');
 }
 
-// ─── Step 6: Inference ────────────────────────────────────────────────────────
+// ─── Step 6: Test sentences & Inference ───────────────────────────────────────
+async function loadTestSentences() {
+  if (document.getElementById('chips-ok').children.length > 0) return; // already loaded
+  try {
+    const items = await fetch('/api/test_sentences').then(r=>r.json());
+    const okEl = document.getElementById('chips-ok');
+    const oovEl = document.getElementById('chips-oov');
+    okEl.innerHTML = ''; oovEl.innerHTML = '';
+    items.forEach(item => {
+      const btn = document.createElement('button');
+      btn.className = 'test-chip ' + (item.has_oov ? 'chip-oov' : 'chip-ok');
+      btn.innerHTML = `${item.sentence}<span class="chip-desc">${item.description}</span>`;
+      btn.onclick = () => loadTestChip(item.sentence);
+      (item.has_oov ? oovEl : okEl).appendChild(btn);
+    });
+  } catch(e) { /* sentences load silently */ }
+}
+
+function loadTestChip(sentence) {
+  document.getElementById('infer-input').value = sentence;
+  liveOovCheck();
+  document.getElementById('tl-results').style.display = 'none';
+  document.getElementById('attn-card').style.display = 'none';
+  toast('Sentence loaded — click Translate →','info');
+}
+
+// Live OOV check as user types
+let _oovDebounce = null;
+async function liveOovCheck() {
+  clearTimeout(_oovDebounce);
+  const s = document.getElementById('infer-input').value.trim();
+  const row = document.getElementById('live-tok-row');
+  const banner = document.getElementById('oov-banner');
+  if (!s || !S.ready.vocab) { row.style.display='none'; banner.style.display='none'; return; }
+  _oovDebounce = setTimeout(async () => {
+    const d = await api('/api/tokenize', {sentence: s});
+    if (d.error) return;
+    // Token chips
+    row.style.display = 'block';
+    document.getElementById('tok-chips').innerHTML = d.tokens.map(t => `<span class="tok-chip ${d.unknown.includes(t)?'tok-unk':'tok-known'}">${t}</span>`).join('');
+    // OOV banner
+    if (d.unknown.length > 0) {
+      banner.style.display = 'flex';
+      document.getElementById('oov-toks').innerHTML = d.unknown.map(t=>`<span class="oov-tok">⚠ ${t}</span>`).join('');
+    } else {
+      banner.style.display = 'none';
+    }
+  }, 250);
+}
+
 async function doTranslate() {
   const sentence = document.getElementById('infer-input').value.trim();
   if (!sentence) { toast('Enter a sentence','warn'); return; }
-  document.getElementById('btn-translate').disabled = true;
-  document.getElementById('btn-translate').textContent = '…';
-  const d = await api('/api/translate', {sentence});
-  document.getElementById('btn-translate').disabled = false;
-  document.getElementById('btn-translate').textContent = 'Translate →';
-  if (d.error) { toast(d.error,'err'); return; }
-  document.getElementById('tl-results').style.display = 'grid';
-  document.getElementById('tl-greedy').textContent = d.greedy || '—';
-  document.getElementById('tl-beam').textContent   = d.beam   || '—';
-  if (d.attention && d.attention.length > 0 && d.src_tokens.length > 0) {
-    document.getElementById('attn-card').style.display = 'block';
+  document.getElementById('btn-translate').disabled=true;
+  document.getElementById('btn-translate').textContent='…';
+  const d = await api('/api/translate',{sentence});
+  document.getElementById('btn-translate').disabled=false;
+  document.getElementById('btn-translate').textContent='Translate →';
+  if (d.error){toast(d.error,'err');return;}
+  // Token chips
+  const row = document.getElementById('live-tok-row');
+  row.style.display='block';
+  document.getElementById('tok-chips').innerHTML = d.src_tokens.map(t=>`<span class="tok-chip ${d.unknown_tokens.includes(t)?'tok-unk':'tok-known'}">${t}</span>`).join('');
+  // OOV banner
+  const banner = document.getElementById('oov-banner');
+  if (d.unknown_tokens && d.unknown_tokens.length > 0) {
+    banner.style.display='flex';
+    document.getElementById('oov-toks').innerHTML=d.unknown_tokens.map(t=>`<span class="oov-tok">⚠ ${t}</span>`).join('');
+  } else {
+    banner.style.display='none';
+  }
+  // Results
+  document.getElementById('tl-results').style.display='grid';
+  document.getElementById('tl-greedy').textContent=d.greedy||'—';
+  document.getElementById('tl-beam').textContent=d.beam||'—';
+  // Attention
+  if (d.attention && d.attention.length>0 && d.src_tokens.length>0) {
+    document.getElementById('attn-card').style.display='block';
     drawHeatmap(d.attention, d.src_tokens, d.tgt_tokens);
+  } else {
+    document.getElementById('attn-card').style.display='none';
   }
 }
 
 function drawHeatmap(weights, srcToks, tgtToks) {
-  const cv = document.getElementById('attn-cv');
-  const ctx = cv.getContext('2d');
-  const rows = weights.length;
-  const cols = weights[0] ? weights[0].length : 0;
-  if (!rows || !cols) return;
-
-  const CELL_W = Math.max(48, Math.min(80, 600 / cols));
-  const CELL_H = 32;
-  const PAD_L = 90, PAD_T = 16, PAD_B = 70;
-
-  cv.width  = Math.max(PAD_L + cols * CELL_W + 10, 400);
-  cv.height = PAD_T + rows * CELL_H + PAD_B;
-
-  ctx.clearRect(0, 0, cv.width, cv.height);
-  ctx.fillStyle = '#0a0a1a';
-  ctx.fillRect(0, 0, cv.width, cv.height);
-
-  const maxVal = Math.max(...weights.flat().map(v => isNaN(v) ? 0 : v), 1e-9);
-
-  for (let r = 0; r < rows; r++) {
-    for (let c = 0; c < cols; c++) {
-      const v = (weights[r][c] || 0) / maxVal;
-      const a = 0.08 + v * 0.92;
-      ctx.fillStyle = `rgba(139,92,246,${a.toFixed(3)})`;
-      ctx.fillRect(PAD_L + c * CELL_W + 1, PAD_T + r * CELL_H + 1, CELL_W - 2, CELL_H - 2);
-      if (v > 0.5) {
-        ctx.fillStyle = 'rgba(255,255,255,0.7)';
-        ctx.font = '9px monospace';
-        ctx.textAlign = 'center';
-        ctx.fillText(v.toFixed(2), PAD_L + c * CELL_W + CELL_W/2, PAD_T + r * CELL_H + CELL_H/2 + 3);
+  const cv=document.getElementById('attn-cv'), ctx=cv.getContext('2d');
+  const rows=weights.length, cols=weights[0]?weights[0].length:0;
+  if (!rows||!cols) return;
+  const CW=Math.max(48,Math.min(80,600/cols)), CH=32, PL=90, PT=16, PB=70;
+  cv.width=Math.max(PL+cols*CW+10,400); cv.height=PT+rows*CH+PB;
+  ctx.clearRect(0,0,cv.width,cv.height);
+  ctx.fillStyle='#0a0a1a'; ctx.fillRect(0,0,cv.width,cv.height);
+  const maxV=Math.max(...weights.flat().map(v=>isNaN(v)?0:v),1e-9);
+  for (let r=0;r<rows;r++) {
+    for (let c=0;c<cols;c++) {
+      const v=(weights[r][c]||0)/maxV, a=0.08+v*0.92;
+      ctx.fillStyle=`rgba(139,92,246,${a.toFixed(3)})`;
+      ctx.fillRect(PL+c*CW+1,PT+r*CH+1,CW-2,CH-2);
+      if (v>0.5) {
+        ctx.fillStyle='rgba(255,255,255,0.7)'; ctx.font='9px monospace'; ctx.textAlign='center';
+        ctx.fillText(v.toFixed(2),PL+c*CW+CW/2,PT+r*CH+CH/2+3);
       }
     }
-    ctx.fillStyle = '#94a3b8';
-    ctx.font = '11px Fira Code, monospace';
-    ctx.textAlign = 'right';
-    ctx.fillText(tgtToks[r] || '', PAD_L - 6, PAD_T + r * CELL_H + CELL_H/2 + 4);
+    ctx.fillStyle='#94a3b8'; ctx.font='11px Fira Code, monospace'; ctx.textAlign='right';
+    ctx.fillText(tgtToks[r]||'',PL-6,PT+r*CH+CH/2+4);
   }
-
-  ctx.textAlign = 'center';
-  for (let c = 0; c < cols; c++) {
-    ctx.save();
-    ctx.translate(PAD_L + c * CELL_W + CELL_W/2, PAD_T + rows * CELL_H + 14);
-    ctx.rotate(-Math.PI / 4);
-    ctx.fillStyle = '#94a3b8';
-    ctx.font = '11px Fira Code, monospace';
-    ctx.fillText(srcToks[c] || '', 0, 0);
-    ctx.restore();
+  for (let c=0;c<cols;c++) {
+    ctx.save(); ctx.translate(PL+c*CW+CW/2,PT+rows*CH+14); ctx.rotate(-Math.PI/4);
+    ctx.fillStyle='#94a3b8'; ctx.font='11px Fira Code, monospace'; ctx.textAlign='center';
+    ctx.fillText(srcToks[c]||'',0,0); ctx.restore();
   }
-
-  // axis labels
-  ctx.save();
-  ctx.translate(12, PAD_T + rows * CELL_H / 2);
-  ctx.rotate(-Math.PI / 2);
-  ctx.fillStyle = '#64748b';
-  ctx.font = '11px sans-serif';
-  ctx.textAlign = 'center';
-  ctx.fillText('Target tokens →', 0, 0);
-  ctx.restore();
-  ctx.fillStyle = '#64748b';
-  ctx.font = '11px sans-serif';
-  ctx.textAlign = 'center';
-  ctx.fillText('Source tokens →', PAD_L + cols * CELL_W / 2, cv.height - 8);
+  ctx.save(); ctx.translate(12,PT+rows*CH/2); ctx.rotate(-Math.PI/2);
+  ctx.fillStyle='#64748b'; ctx.font='11px sans-serif'; ctx.textAlign='center';
+  ctx.fillText('Target tokens →',0,0); ctx.restore();
+  ctx.fillStyle='#64748b'; ctx.font='11px sans-serif'; ctx.textAlign='center';
+  ctx.fillText('Source tokens →',PL+cols*CW/2,cv.height-8);
 }
 
 // ─── Init ─────────────────────────────────────────────────────────────────────
-window.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('DOMContentLoaded',()=>{
   cfgChange();
-  // Restore state if model already built (page refresh)
-  fetch('/api/state').then(r=>r.json()).then(d => {
-    S.ready = d.ready;
-    if (d.ready.data)    { unlockStep(2); }
-    if (d.ready.vocab)   { unlockStep(3); }
-    if (d.ready.model)   { unlockStep(4); if (d.params) document.getElementById('param-est').textContent = d.params.toLocaleString(); }
+  fetch('/api/state').then(r=>r.json()).then(d=>{
+    S.ready=d.ready;
+    if (d.total_available_pairs) {
+      document.getElementById('ds-avail').textContent=d.total_available_pairs;
+      document.getElementById('mp-slider').max=d.total_available_pairs;
+      document.getElementById('mp-slider').value=d.total_available_pairs;
+      document.getElementById('mp-val').textContent=d.total_available_pairs;
+      document.getElementById('ds-using').textContent=d.total_available_pairs;
+    }
+    if (d.ready.data) unlockStep(2);
+    if (d.ready.vocab) unlockStep(3);
+    if (d.ready.model) { unlockStep(4); if (d.params) document.getElementById('param-est').textContent=d.params.toLocaleString(); }
     if (d.ready.trained) {
       unlockStep(5); unlockStep(6);
-      S.trainLosses = d.train_losses;
-      S.valLosses = d.val_losses;
-      document.getElementById('bleu-g').textContent = d.bleu_greedy;
-      document.getElementById('bleu-b').textContent = d.bleu_beam;
-      if (d.sample_translations && d.sample_translations.length) updateEvalTable(d.sample_translations);
-      document.getElementById('global-badge').className = 'badge badge-done';
-      document.getElementById('global-badge').textContent = '✅ Training Complete';
+      S.trainLosses=d.train_losses; S.valLosses=d.val_losses;
+      document.getElementById('bleu-g').textContent=d.bleu_greedy;
+      document.getElementById('bleu-b').textContent=d.bleu_beam;
+      if (d.sample_translations&&d.sample_translations.length) updateEvalTable(d.sample_translations);
+      document.getElementById('global-badge').className='badge badge-done';
+      document.getElementById('global-badge').textContent='✅ Training Complete';
     }
   });
 });

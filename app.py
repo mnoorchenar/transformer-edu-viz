@@ -5,7 +5,7 @@ import torch, torch.nn.functional as F
 from torch.utils.data import DataLoader
 import sacrebleu
 
-from transformer.data import (PAIRS, build_vocab, TranslationDataset, collate_fn,
+from transformer.data import (PAIRS, TEST_SENTENCES, build_vocab, TranslationDataset, collate_fn,
                                encode, decode, preprocess_input,
                                PAD_IDX, SOS_IDX, EOS_IDX, UNK_IDX)
 from transformer.model import Transformer, LabelSmoothingLoss, WarmupScheduler
@@ -40,20 +40,24 @@ def index():
 
 @app.route('/api/init/data', methods=['POST'])
 def init_data():
-    aug = max(1, min(16, int((request.json or {}).get('augmentation', 12))))
+    body = request.json or {}
+    aug = max(1, min(16, int(body.get('augmentation', 12))))
+    max_pairs = max(20, min(len(PAIRS), int(body.get('max_pairs', len(PAIRS)))))
+    pairs = PAIRS[:max_pairs]
     random.seed(42)
-    augmented = PAIRS * aug
+    augmented = pairs * aug
     random.shuffle(augmented)
     split = int(len(augmented) * 0.875)
     with _lock:
-        G['pairs'] = PAIRS
+        G['pairs'] = pairs
         G['train_data'] = augmented[:split]
         G['val_data'] = augmented[split:]
         G['ready']['data'] = True
     return jsonify({
-        'unique_pairs': len(PAIRS), 'aug_factor': aug, 'total': len(augmented),
+        'unique_pairs': len(pairs), 'total_available': len(PAIRS),
+        'aug_factor': aug, 'total': len(augmented),
         'train_size': split, 'val_size': len(augmented) - split,
-        'sample': [[en, fr] for en, fr in PAIRS[:8]],
+        'sample': [[en, fr] for en, fr in pairs[:8]],
     })
 
 
@@ -152,6 +156,14 @@ def train_stop():
     return jsonify({'status': 'stopping'})
 
 
+@app.route('/api/test_sentences')
+def get_test_sentences():
+    return jsonify([
+        {'sentence': s, 'description': desc, 'has_oov': oov}
+        for s, desc, oov in TEST_SENTENCES
+    ])
+
+
 @app.route('/api/translate', methods=['POST'])
 def translate():
     if G['model'] is None:
@@ -160,12 +172,16 @@ def translate():
     if not sentence:
         return jsonify({'error': 'Empty input'}), 400
     sv, tv, si, ti = G['src_vocab'], G['tgt_vocab'], G['src_inv'], G['tgt_inv']
+    pre = preprocess_input(sentence)
+    toks = pre.split()
+    unknown = [t for t in toks if t not in sv]
     g_out = _greedy(G['model'], sentence, sv, ti)
     b_out = _beam(G['model'], sentence, sv, ti)
     attn = _get_attn(G['model'], sentence, b_out, sv, tv, ti)
     return jsonify({'greedy': g_out, 'beam': b_out,
-                    'src_tokens': preprocess_input(sentence).split(),
+                    'src_tokens': toks,
                     'tgt_tokens': b_out.split() if b_out else [],
+                    'unknown_tokens': unknown,
                     'attention': attn})
 
 
@@ -190,6 +206,7 @@ def get_state():
         'current_epoch': G['current_epoch'],
         'bleu_greedy': G['bleu_greedy'], 'bleu_beam': G['bleu_beam'],
         'sample_translations': G['sample_translations'], 'cfg': G['cfg'],
+        'total_available_pairs': len(PAIRS),
         'params': sum(p.numel() for p in G['model'].parameters() if p.requires_grad) if G['model'] else 0,
     })
 
